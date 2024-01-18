@@ -1,31 +1,23 @@
 import { useContext, useReducer, useState } from 'react';
-import { v4 as uuid } from 'uuid';
 import GroceryForm from '../components/grocery/GroceryForm';
-import GroceryActive from './GroceryActive';
-import GroceryCompleted from './GroceryCompleted';
-import GroceryRemoved from './GroceryRemoved';
 import GroceryNavigation from '../components/grocery/GroceryNavigation';
 import GroceryPrices from '../components/grocery/GroceryPrices';
 import groceryReducer from '../reducer/grocery-reducer';
 import { DarkModeContext } from '../context/DarkModeContext';
+import GroceryList from '../components/grocery/GroceryList';
 
 const ACTIVE = 'active';
 const COMPLETED = 'completed';
 const REMOVED = 'removed';
 const STORAGE_KEY = 'grocery';
-let initialState = [];
 
 function Grocery() {
-  const [grocery, dispatch] = useReducer(groceryReducer, initialState, init);
+  const [grocery, dispatch] = useReducer(groceryReducer, [], init);
   const [activeStatus, setActiveStatus] = useState(ACTIVE);
   const [itemName, setItemName] = useState('');
   const { darkMode } = useContext(DarkModeContext);
 
-  const activeGrocery = grocery.filter(
-    (item) => !item.completed && !item.removed
-  );
-  const completedGrocery = grocery.filter((item) => item.completed);
-  const removedGrocery = grocery.filter((item) => item.removed);
+  const filteredGrocery = getFilteredGrocery(grocery, activeStatus);
 
   const changeHandler = (e) => {
     setItemName(e.target.value);
@@ -36,20 +28,7 @@ function Grocery() {
 
     if (itemName.trim().length === 0) return;
 
-    const newItem = {
-      name: itemName
-        .trim()
-        .split(' ')
-        .map(
-          (word) => word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase()
-        )
-        .join(' '),
-      completed: false,
-      removed: false,
-      id: uuid(),
-    };
-
-    dispatch({ type: 'add', newItem });
+    dispatch({ type: 'add', itemName });
 
     setItemName('');
   };
@@ -76,28 +55,12 @@ function Grocery() {
         }`}
       >
         {/* LIST */}
-        {(activeStatus === null || activeStatus === ACTIVE) && (
-          <GroceryActive
-            grocery={activeGrocery}
-            onCheck={checkHandler}
-            onRemove={removeHandler}
-          />
-        )}
-        {activeStatus === COMPLETED && (
-          <GroceryCompleted
-            activeStatus={activeStatus}
-            grocery={completedGrocery}
-            onCheck={checkHandler}
-            onRemove={removeHandler}
-          />
-        )}
-        {activeStatus === REMOVED && (
-          <GroceryRemoved
-            grocery={removedGrocery}
-            onCheck={checkHandler}
-            onRemove={removeHandler}
-          />
-        )}
+        <GroceryList
+          activeStatus={activeStatus}
+          grocery={filteredGrocery}
+          onCheck={checkHandler}
+          onRemove={removeHandler}
+        />
 
         {/* PRICE */}
         <GroceryPrices />
@@ -116,6 +79,22 @@ function Grocery() {
 export default Grocery;
 
 function init() {
-  const savedGrocery = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  return savedGrocery;
+  const storedGrocery = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  return storedGrocery;
+}
+
+function getFilteredGrocery(grocery, activeStatus) {
+  let filteredGrocery;
+
+  if (activeStatus === ACTIVE) {
+    filteredGrocery = grocery.filter(
+      (item) => !item.completed && !item.removed
+    );
+  } else if (activeStatus === COMPLETED) {
+    filteredGrocery = grocery.filter((item) => item.completed);
+  } else if (activeStatus === REMOVED) {
+    filteredGrocery = grocery.filter((item) => item.removed);
+  }
+
+  return filteredGrocery;
 }

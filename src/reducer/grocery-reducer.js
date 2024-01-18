@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 const ACTIVE = 'active';
 const COMPLETED = 'completed';
 const REMOVED = 'removed';
@@ -7,7 +9,21 @@ function groceryReducer(grocery, action) {
   let newGrocery;
   switch (action.type) {
     case 'add': {
-      const { newItem } = action;
+      const { itemName } = action;
+
+      const newItem = {
+        name: itemName
+          .trim()
+          .split(' ')
+          .map(
+            (word) =>
+              word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(' '),
+        completed: false,
+        removed: false,
+        id: uuid(),
+      };
 
       newGrocery = [newItem, ...grocery];
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));

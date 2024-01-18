@@ -2,9 +2,7 @@ import { useContext } from 'react';
 import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
 import { DarkModeContext } from '../../context/DarkModeContext';
 
-const ACTIVE = 'active';
-const COMPLETED = 'completed';
-const REMOVED = 'removed';
+const navigation = ['active', 'completed', 'removed'];
 
 function GroceryNavigation({ activeStatus, setActiveStatus }) {
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
@@ -28,30 +26,18 @@ function GroceryNavigation({ activeStatus, setActiveStatus }) {
             <MdOutlineDarkMode className='text-xl' />
           )}
         </li>
-        <li
-          onClick={activeStatusHandler}
-          className={`border-b-2 ${
-            activeStatus === ACTIVE ? activeStyle : 'border-transparent'
-          } cursor-pointer`}
-        >
-          ACTIVE
-        </li>
-        <li
-          onClick={activeStatusHandler}
-          className={`border-b-2 ${
-            activeStatus === COMPLETED ? activeStyle : 'border-transparent'
-          } cursor-pointer`}
-        >
-          Completed
-        </li>
-        <li
-          onClick={activeStatusHandler}
-          className={`border-b-2 ${
-            activeStatus === REMOVED ? activeStyle : 'border-transparent'
-          } cursor-pointer`}
-        >
-          Removed
-        </li>
+
+        {navigation.map((nav, idx) => (
+          <li
+            key={idx}
+            onClick={activeStatusHandler}
+            className={`border-b-2 ${
+              activeStatus === nav ? activeStyle : 'border-transparent'
+            } cursor-pointer`}
+          >
+            {nav.toUpperCase()}
+          </li>
+        ))}
       </ul>
     </nav>
   );
