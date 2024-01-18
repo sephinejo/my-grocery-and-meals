@@ -7,9 +7,14 @@ const STORAGE_KEY = 'grocery';
 
 function groceryReducer(grocery, action) {
   let newGrocery;
+  const newDate = new Date().toLocaleString('en', {
+    dateStyle: 'short',
+    timeStyle: 'short',
+  });
+
   switch (action.type) {
     case 'add': {
-      const { itemName } = action;
+      const { itemName, date } = action;
 
       const newItem = {
         name: itemName
@@ -22,6 +27,7 @@ function groceryReducer(grocery, action) {
           .join(' '),
         completed: false,
         removed: false,
+        date,
         id: uuid(),
       };
 
@@ -32,11 +38,13 @@ function groceryReducer(grocery, action) {
 
     case 'check': {
       const { item, activeStatus } = action;
+
       if (activeStatus === COMPLETED) {
         item.completed = false;
       } else {
         item.completed = true;
       }
+      item.date = newDate;
       item.removed = false;
 
       newGrocery = [...grocery];
@@ -59,6 +67,7 @@ function groceryReducer(grocery, action) {
       } else {
         item.removed = true;
         item.completed = false;
+        // item.date = newDate;
         newGrocery = [...grocery];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));
         return newGrocery;

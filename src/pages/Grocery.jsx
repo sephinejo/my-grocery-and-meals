@@ -1,7 +1,6 @@
 import { useContext, useReducer, useState } from 'react';
 import GroceryForm from '../components/grocery/GroceryForm';
 import GroceryNavigation from '../components/grocery/GroceryNavigation';
-import GroceryPrices from '../components/grocery/GroceryPrices';
 import groceryReducer from '../reducer/grocery-reducer';
 import { DarkModeContext } from '../context/DarkModeContext';
 import GroceryList from '../components/grocery/GroceryList';
@@ -28,8 +27,13 @@ function Grocery() {
 
     if (itemName.trim().length === 0) return;
 
-    dispatch({ type: 'add', itemName });
+    const date = new Date().toLocaleString('en', {
+      dateStyle: 'short',
+      timeStyle: 'short',
+    });
 
+    dispatch({ type: 'add', itemName, date });
+    setActiveStatus(ACTIVE);
     setItemName('');
   };
 
@@ -50,8 +54,10 @@ function Grocery() {
       />
 
       <main
-        className={`h-[82%] overflow-auto font-default grid grid-cols-3 gap-[1px] ${
-          darkMode ? 'text-white' : 'text-black'
+        className={`h-[82%] overflow-auto font-default ${
+          darkMode
+            ? 'text-white bg-braves-navy'
+            : 'text-black bg-gradient-green'
         }`}
       >
         {/* LIST */}
@@ -61,9 +67,6 @@ function Grocery() {
           onCheck={checkHandler}
           onRemove={removeHandler}
         />
-
-        {/* PRICE */}
-        <GroceryPrices />
       </main>
 
       {/* FORM */}

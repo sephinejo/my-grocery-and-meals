@@ -1,16 +1,8 @@
-import { useContext } from 'react';
-import { DarkModeContext } from '../../context/DarkModeContext';
 import GroceryItem from './GroceryItem';
 
 function GroceryList({ activeStatus, grocery, onCheck, onRemove }) {
-  const { darkMode } = useContext(DarkModeContext);
-
   return (
-    <ul
-      className={`${
-        darkMode ? 'bg-braves-navy' : 'bg-gradient-green'
-      } col-span-2 p-3`}
-    >
+    <ul className='col-span-2 py-3 px-3'>
       {grocery.map((item) => (
         <GroceryItem
           key={item.id}

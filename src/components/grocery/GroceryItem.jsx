@@ -26,7 +26,12 @@ function GroceryItem({ activeStatus, item, onCheck, onRemove }) {
           checked={activeStatus === COMPLETED && item.completed}
         />
         <label htmlFor={`checkbox-${item.id}`}></label>
-        <span>{item.name}</span>
+        <span>
+          <span className='pr-3'>{item.name}</span>
+          <small className='align-middle text-white tracking-wide border-dark-green border-b-[1px] border-dashed'>
+            {item.date}
+          </small>
+        </span>
       </div>
       <MdDelete
         onClick={() => onRemove(item)}
