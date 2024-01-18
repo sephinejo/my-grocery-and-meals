@@ -1,12 +1,17 @@
 const ACTIVE = 'active';
 const COMPLETED = 'completed';
 const REMOVED = 'removed';
+const STORAGE_KEY = 'grocery';
 
 function groceryReducer(grocery, action) {
+  let newGrocery;
   switch (action.type) {
     case 'add': {
       const { newItem } = action;
-      return [newItem, ...grocery];
+
+      newGrocery = [newItem, ...grocery];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));
+      return newGrocery;
     }
 
     case 'check': {
@@ -18,22 +23,29 @@ function groceryReducer(grocery, action) {
       }
       item.removed = false;
 
-      return [...grocery];
+      newGrocery = [...grocery];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));
+      return newGrocery;
     }
 
     case 'remove': {
       const { item, activeStatus, setActiveStatus } = action;
       if (activeStatus === REMOVED) {
-        const removedGrocery = grocery.filter((i) => i.id !== item.id);
-        if (removedGrocery.length === 0) {
+        newGrocery = grocery.filter((i) => i.id !== item.id);
+        if (newGrocery.length === 0) {
           setActiveStatus(ACTIVE);
-          return [];
+          newGrocery = [];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));
+          return newGrocery;
         }
-        return [...removedGrocery];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));
+        return newGrocery;
       } else {
         item.removed = true;
         item.completed = false;
-        return [...grocery];
+        newGrocery = [...grocery];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));
+        return newGrocery;
       }
     }
 

@@ -12,9 +12,11 @@ import { DarkModeContext } from '../context/DarkModeContext';
 const ACTIVE = 'active';
 const COMPLETED = 'completed';
 const REMOVED = 'removed';
+const STORAGE_KEY = 'grocery';
+let initialState = [];
 
 function Grocery() {
-  const [grocery, dispatch] = useReducer(groceryReducer, []);
+  const [grocery, dispatch] = useReducer(groceryReducer, initialState, init);
   const [activeStatus, setActiveStatus] = useState(ACTIVE);
   const [itemName, setItemName] = useState('');
   const { darkMode } = useContext(DarkModeContext);
@@ -112,3 +114,8 @@ function Grocery() {
 }
 
 export default Grocery;
+
+function init() {
+  const savedGrocery = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  return savedGrocery;
+}
