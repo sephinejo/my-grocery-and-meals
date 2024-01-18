@@ -4,18 +4,11 @@ import Header from './components/Header';
 import Grocery from './pages/Grocery';
 import Meals from './pages/Meals';
 
-const GROCERY = 'grocery';
-const MEALS = 'meals';
+const CATEGORIES = ['grocery', 'meals'];
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState(GROCERY);
-
+  const [selectedCategory, setSelectedCategory] = useState('grocery');
   const { darkMode } = useContext(DarkModeContext);
-
-  const selectedLightStyle = 'bg-celadon';
-  const selectedDarkStyle = 'bg-dark-blue';
-  const hoverLightStyle = 'bg-celadon-opacity';
-  const hoverDarkStyle = 'bg-dark-blue-opacity';
 
   const selectHandler = (e) => {
     setSelectedCategory(e.target.textContent.toLowerCase());
@@ -24,7 +17,7 @@ function App() {
   return (
     <div
       className={`w-1vw h-lvh ${
-        darkMode ? 'bg-gradient-blue' : 'bg-gradient-pastel'
+        darkMode ? 'bg-gradient-blue-light' : 'bg-gradient-pastel'
       } flex flex-col items-center justify-center`}
     >
       {/* CONTENT */}
@@ -35,34 +28,23 @@ function App() {
               darkMode ? 'text-white' : 'text-brunswick-green'
             }`}
           >
-            <li
-              onClick={selectHandler}
-              className={`cursor-pointer px-2 py-1 rounded-lg ${
-                selectedCategory === GROCERY &&
-                (darkMode
-                  ? ` ${selectedDarkStyle} `
-                  : ` ${selectedLightStyle} `)
-              } ${
-                darkMode
-                  ? selectedCategory !== GROCERY && `hover:${hoverDarkStyle}`
-                  : selectedCategory !== GROCERY && `hover:${hoverLightStyle}`
-              }`}
-            >
-              Grocery
-            </li>
-            <li
-              onClick={selectHandler}
-              className={`cursor-pointer px-2 py-1 rounded-lg ${
-                selectedCategory === MEALS &&
-                (darkMode ? `${selectedDarkStyle}` : `${selectedLightStyle}`)
-              } ${
-                darkMode
-                  ? selectedCategory !== MEALS && `hover:${hoverDarkStyle}`
-                  : selectedCategory !== MEALS && `hover:${hoverLightStyle}`
-              }`}
-            >
-              Meals
-            </li>
+            {CATEGORIES.map((category, idx) => (
+              <li
+                key={idx}
+                onClick={selectHandler}
+                className={`cursor-pointer px-2 py-1 rounded-lg ${
+                  darkMode
+                    ? selectedCategory === category
+                      ? 'bg-dark-blue'
+                      : 'hover:bg-dark-blue-opacity'
+                    : selectedCategory === category
+                    ? 'bg-celadon'
+                    : 'hover:bg-celadon-opacity'
+                }`}
+              >
+                {category.toUpperCase()}
+              </li>
+            ))}
           </ul>
         </nav>
 
@@ -70,8 +52,8 @@ function App() {
         <Header text={selectedCategory} />
 
         {/* MAIN */}
-        {selectedCategory === GROCERY && <Grocery />}
-        {selectedCategory === MEALS && <Meals />}
+        {selectedCategory === 'grocery' && <Grocery />}
+        {selectedCategory === 'meals' && <Meals />}
       </div>
     </div>
   );

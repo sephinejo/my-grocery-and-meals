@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         celadon: '#ACE1AF',
         'celadon-opacity': '#ACE1AF99',
+        'baby-blue': '#89CFF0',
         'laurel-green': '#A9BA9D',
         'islamic-green': '#009000',
         'dark-green': '#006400',

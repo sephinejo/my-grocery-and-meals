@@ -6,7 +6,8 @@ const navigation = ['active', 'completed', 'removed'];
 
 function GroceryNavigation({ activeStatus, setActiveStatus }) {
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
-  const activeStyle = 'border-celadon';
+  const activeLightStyle = 'border-celadon';
+  const activeDarkStyle = 'border-dark-blue';
 
   const activeStatusHandler = (e) => {
     setActiveStatus(e.target.textContent.toLowerCase());
@@ -32,7 +33,13 @@ function GroceryNavigation({ activeStatus, setActiveStatus }) {
             key={idx}
             onClick={activeStatusHandler}
             className={`border-b-2 ${
-              activeStatus === nav ? activeStyle : 'border-transparent'
+              darkMode
+                ? activeStatus === nav
+                  ? activeDarkStyle
+                  : 'border-transparent'
+                : activeStatus === nav
+                ? activeLightStyle
+                : 'border-transparent'
             } cursor-pointer`}
           >
             {nav.toUpperCase()}

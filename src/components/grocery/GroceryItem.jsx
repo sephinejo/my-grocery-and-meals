@@ -18,9 +18,7 @@ function GroceryItem({ activeStatus, item, onCheck, onRemove }) {
           type='checkbox'
           id={`checkbox-${item.id}`}
           name='grocery'
-          className={`outline-none w-4 h-4 ${
-            darkMode ? 'text-white' : 'text-accent-brunswick-green'
-          }`}
+          className='outline-none w-4 h-4'
           onChange={() => checkHandler(item)}
           value={item.id}
           checked={activeStatus === COMPLETED && item.completed}
@@ -28,14 +26,20 @@ function GroceryItem({ activeStatus, item, onCheck, onRemove }) {
         <label htmlFor={`checkbox-${item.id}`}></label>
         <span>
           <span className='pr-3'>{item.name}</span>
-          <small className='align-middle text-white tracking-wide border-dark-green border-b-[1px] border-dashed'>
+          <small
+            className={`align-middle ${
+              darkMode
+                ? 'text-baby-blue border-white'
+                : 'text-white border-dark-green'
+            } border-b-[1px] border-dashed tracking-wide`}
+          >
             {item.date}
           </small>
         </span>
       </div>
       <MdDelete
         onClick={() => onRemove(item)}
-        className='cursor-pointer text-xl'
+        className='cursor-pointer text-xl hover:scale-125 transition ease-in-out'
       />
     </li>
   );

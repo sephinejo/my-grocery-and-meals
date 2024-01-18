@@ -56,7 +56,7 @@ function Grocery() {
       <main
         className={`h-[82%] overflow-auto font-default ${
           darkMode
-            ? 'text-white bg-braves-navy'
+            ? 'text-white bg-gradient-blue'
             : 'text-black bg-gradient-green'
         }`}
       >
