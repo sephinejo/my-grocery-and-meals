@@ -20,14 +20,6 @@ function GroceryNavigation({ activeStatus, setActiveStatus }) {
           darkMode ? 'text-white' : 'text-brunswick-green'
         }`}
       >
-        <li onClick={toggleDarkMode} className='cursor-pointer'>
-          {darkMode ? (
-            <MdOutlineLightMode className='text-xl' />
-          ) : (
-            <MdOutlineDarkMode className='text-xl' />
-          )}
-        </li>
-
         {navigation.map((nav, idx) => (
           <li
             key={idx}
@@ -45,6 +37,13 @@ function GroceryNavigation({ activeStatus, setActiveStatus }) {
             {nav.toUpperCase()}
           </li>
         ))}
+        <li onClick={toggleDarkMode} className='cursor-pointer'>
+          {darkMode ? (
+            <MdOutlineLightMode className='text-xl' />
+          ) : (
+            <MdOutlineDarkMode className='text-xl' />
+          )}
+        </li>
       </ul>
     </nav>
   );
