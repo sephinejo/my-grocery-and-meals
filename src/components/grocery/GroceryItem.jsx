@@ -20,7 +20,7 @@ function GroceryItem({ activeStatus, item, onCheck, onRemove }) {
           name='grocery'
           className='outline-none w-4 h-4'
           onChange={() => checkHandler(item)}
-          value={item.id}
+          value={item.name}
           checked={activeStatus === COMPLETED && item.completed}
         />
         <label htmlFor={`checkbox-${item.id}`}></label>
