@@ -19,7 +19,7 @@ function GroceryForm({ onChange, onSubmit, itemName }) {
         type='submit'
         className={`absolute top-[.23rem] right-[.3rem] ${
           darkMode ? 'bg-eagles-midnight-green' : 'bg-laurel-green'
-        } px-10 py-1 text-white inline rounded-xs text-lg`}
+        } w-[19%] h-[84%] text-white inline rounded-xs text-lg`}
       >
         Enter
       </button>

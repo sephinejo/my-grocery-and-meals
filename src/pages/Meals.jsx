@@ -9,7 +9,7 @@ function Meals() {
     <>
       <MealsNavigation />
       <main
-        className={`h-[82%] overflow-auto font-default p-3 ${
+        className={`h-full rounded-b-lg overflow-auto font-default p-3 ${
           darkMode
             ? 'text-white bg-gradient-blue'
             : 'text-black bg-gradient-green'
