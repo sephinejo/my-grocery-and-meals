@@ -31,7 +31,7 @@ function groceryReducer(grocery, action) {
         id: uuid(),
       };
 
-      newGrocery = [newItem, ...grocery];
+      newGrocery = grocery ? [newItem, ...grocery] : [newItem];
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newGrocery));
       return newGrocery;
     }

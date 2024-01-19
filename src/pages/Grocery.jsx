@@ -87,8 +87,9 @@ function init() {
 }
 
 function getFilteredGrocery(grocery, activeStatus) {
-  let filteredGrocery;
+  if (!grocery) return;
 
+  let filteredGrocery;
   if (activeStatus === ACTIVE) {
     filteredGrocery = grocery.filter(
       (item) => !item.completed && !item.removed
