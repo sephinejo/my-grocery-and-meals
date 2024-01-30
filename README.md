@@ -1,4 +1,4 @@
-# My GROCERY 🥦
+# 🥑 My GROCERY
 **A grocery management application that allows you to move items active, completed and removed section freely.**
 
 ## Live Demo
