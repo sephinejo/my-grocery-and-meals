@@ -23,6 +23,8 @@ https://github.com/sephinejo/my-grocery-and-meals/assets/110086543/9c537196-f567
 
 ✅ Items and color mode are stored in the local storage.
 
+✅ Responsive design applied.
+
 ## Technology
 - React.js
 - Tailwindcss
