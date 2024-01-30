@@ -28,3 +28,5 @@ https://github.com/sephinejo/my-grocery-and-meals/assets/110086543/9c537196-f567
 ## Technology
 - React.js
 - Tailwindcss
+- Local Storage
+- Deploy: Netlify
