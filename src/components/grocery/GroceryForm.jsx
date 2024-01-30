@@ -11,15 +11,15 @@ function GroceryForm({ onChange, onSubmit, itemName }) {
       <input
         type='text'
         placeholder='Enter your item'
-        className='w-full h-full text-black rounded-b-lg px-3 text-lg outline-none'
+        className='w-full h-full text-black rounded-b-lg px-3 text-base md:text-lg outline-none'
         onChange={onChange}
         value={itemName}
       />
       <button
         type='submit'
-        className={`absolute top-[.23rem] right-[.3rem] ${
+        className={`absolute top-[.23rem] right-[.3rem] text-base md:text-lg ${
           darkMode ? 'bg-eagles-midnight-green' : 'bg-laurel-green'
-        } w-[19%] h-[84%] text-white inline rounded-xs text-lg`}
+        } w-[19%] h-[84%] text-white inline rounded-xs text-base md:text-lg`}
       >
         Enter
       </button>

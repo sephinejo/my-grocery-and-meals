@@ -13,7 +13,7 @@ function GroceryItem({ activeStatus, item, onCheck, onRemove }) {
 
   return (
     <li key={item.id} className='flex justify-between items-center'>
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-1 md:gap-2'>
         <input
           type='checkbox'
           id={`checkbox-${item.id}`}
@@ -25,9 +25,9 @@ function GroceryItem({ activeStatus, item, onCheck, onRemove }) {
         />
         <label htmlFor={`checkbox-${item.id}`}></label>
         <span>
-          <span className='pr-3'>{item.name}</span>
+          <span className='pr-1 md:pr-3'>{item.name}</span>
           <small
-            className={`align-middle ${
+            className={`align-middle text-[.6rem] sm:text-xs md:text-sm ${
               darkMode
                 ? 'text-baby-blue border-white'
                 : 'text-white border-dark-green'

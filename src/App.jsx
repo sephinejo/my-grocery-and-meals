@@ -21,10 +21,10 @@ function App() {
       } flex flex-col items-center justify-center`}
     >
       {/* CONTENT */}
-      <div className='max-w-contentWidth min-h-contentHeight w-3/5 h-3/5 opacity-90 rounded-lg box-shadow flex flex-col relative'>
+      <div className='max-w-contentWidth min-h-contentHeight w-4/5 md:w-3/5 h-4/5 md:h-3/5 opacity-90 rounded-lg box-shadow flex flex-col relative'>
         <nav>
           <ul
-            className={`absolute left-0 top-[-2.5rem] uppercase flex items-center gap-1 ${
+            className={`absolute left-0 top-[-3.1rem] sm:top-[-1.8rem] md:top-[-2rem] lg:top-[-2.5rem] uppercase flex items-center gap-1 text-xs md:text-sm lg:text-base ${
               darkMode ? 'text-white' : 'text-brunswick-green'
             }`}
           >

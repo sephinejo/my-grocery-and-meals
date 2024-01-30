@@ -6,7 +6,7 @@ function Header({ text }) {
 
   return (
     <header
-      className={`h-[9%] font-primary text-2xl uppercase text-center py-6 ${
+      className={`h-[9%] font-primary text-xl md:text-2xl uppercase text-center py-6 ${
         darkMode ? 'bg-eagles-midnight-green' : 'bg-islamic-green'
       } text-white flex justify-center items-center rounded-t-lg tracking-wide`}
     >

@@ -16,7 +16,7 @@ function GroceryNavigation({ activeStatus, setActiveStatus }) {
   return (
     <nav>
       <ul
-        className={`absolute right-[.5rem] top-[-2rem] uppercase flex items-center gap-3 ${
+        className={`absolute right-0 sm:right-[.5rem] top-[-1.5rem] sm:top-[-1.6rem] md:top-[-1.7rem] lg:top-[-2rem] uppercase flex items-center gap-2 lg:gap-3 text-xs md:text-sm lg:text-base ${
           darkMode ? 'text-white' : 'text-brunswick-green'
         }`}
       >
