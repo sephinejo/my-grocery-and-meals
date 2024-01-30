@@ -2,7 +2,7 @@
 **A grocery management application that allows you to move items active, completed and removed section freely.**
 
 ## Live Demo
-[MY GROCERY](https://65a9c791afd6502a7effbc78--gentle-naiad-1e0524.netlify.app/)
+[MY GROCERY](https://peaceful-halva-2ce0e2.netlify.app/)
 
 
 
